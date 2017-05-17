@@ -1,0 +1,5 @@
+{{~#if svc.me.leader}}
+role=leader
+{{~else}}
+role=follower
+{{~/if}}

@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.service.type: NodePort
+  creationTimestamp: null
+  name: haproxy
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: haproxy
+    spec:
+      containers:
+      - image: habitat/haproxy:latest
+        name: haproxy
+        args:
+         - --peer
+         - habitat-mgmt-supervisor
+         - --bind
+         - backend:national-parks.default
+        env:
+        - name: HAB_HAPROXY
+          value: |-
+            bind = '*:8080'
+            status_page = true        
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 9631
+          protocol: TCP
+        - containerPort: 9000
+          protocol: TCP
+        resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: mongo
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: mongo
+    spec:
+      containers:
+      - args:
+         - --peer
+         - habitat-mgmt-supervisor  
+        image: habitat/mongodb:latest
+        name: mongo
+        resources: {}
+        env:
+        - name: HAB_MONGODB
+          value: |-
+            [mongod.net]
+            bind_ip = '0.0.0.0'
+            [mongod.security]
+            cluster_auth_mode = ''
+      restartPolicy: Always
+status: {}

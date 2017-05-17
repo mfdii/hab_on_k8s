@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.service.type: NodePort
+  creationTimestamp: null
+  labels:
+    service: haproxy
+  name: haproxy
+spec:
+  ports:
+  - name: "8080"
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30834
+  - name: "9631"
+    port: 9631
+    protocol: TCP
+    targetPort: 9631
+    nodePort: 31873
+  - name: "9000"
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+    nodePort: 30932
+  selector:
+    service: haproxy
+  type: NodePort
+status:
+  loadBalancer: {}

@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: national-parks
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: national-parks
+    spec:
+      containers:
+      - args:
+        - --peer
+        - habitat-mgmt-supervisor
+        - --bind
+        - database:mongodb.default
+        image: habitat/national-parks:latest
+        name: national-parks
+        resources: {}
+      restartPolicy: Always
+status: {}
