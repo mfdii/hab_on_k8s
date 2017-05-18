@@ -48,16 +48,18 @@ spec:
           - --listen-gossip
           - $(POD_IP)
         env:
-          - name: HAB_REDIS
+          - name: HAB_K8S_REDIS
             value: 'protected-mode="no"'
           - name: POD_NAME
             valueFrom:
               fieldRef:
                 apiVersion: v1
                 fieldPath: metadata.name
-
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
         ports:
           - name: "redis-server"
             containerPort: 6379
-
-
