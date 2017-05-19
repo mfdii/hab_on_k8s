@@ -8,7 +8,6 @@ spec:
   ports:
   - name: "http"
     port: 9631
-    nodePort: 30631
     protocol: TCP
   - name: "gossip-tcp"
     port: 9638
@@ -16,7 +15,6 @@ spec:
   - name: "gossip-udp"
     port: 9638
     protocol: UDP
-  type: NodePort
   selector:
     app: habitat-mgmt-supervisor
 ---
